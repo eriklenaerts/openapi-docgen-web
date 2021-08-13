@@ -1,0 +1,29 @@
+@charset 'utf-8';
+
+/* Core branding API */
+@import '~@a-ui/core/dist/assets//styles/quarks';
+
+
+.App {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.o-header {
+  display: flex;
+
+  &__content-wrapper {
+    flex: 1;
+  }
+}
+
+.main {
+  flex: 1 0 auto;
+  width: 100%;
+
+  @include to($screen-xs-max) {
+    padding-left: 0;
+  }
+}

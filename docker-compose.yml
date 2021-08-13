@@ -1,0 +1,47 @@
+version: '3'
+services:
+  # frontend:
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    # command: npm run start
+    # ports:
+    #   - 4200:4200
+    # volumes:
+    #   - /code/frontend/node_modules
+    #   - ./frontend:/code/frontend
+    # links:
+    #   - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file: backend/.env-docker.list
+    command: npm run start
+    tty: true
+    ports:
+      - 2000:2000
+      - 9229:9229
+    volumes:
+     - ./backend:/code/backend
+     - /code/backend/node_modules
+    depends_on:
+      - mongo
+    links:
+      - mongo
+
+  mongo:
+    image: mongo:3.6.2
+    ports:
+      - "27017:27017"
+
+  postgres:
+    image: postgres:11
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+

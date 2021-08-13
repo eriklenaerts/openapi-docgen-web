@@ -1,0 +1,53 @@
+{
+  "name": "starter-kit",
+  "version": "1.5.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "env-cmd --no-override ./environment/local.env nodemon src/index.js",
+    "build": "babel src -d dist",
+    "serve": "node dist/index.js",
+    "lint": "eslint **/*.js",
+    "test": "env-cmd ./environment/test.env --no-override nyc mocha --recursive  --reporter=spec --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill  --require ./test/setup.test.js --exit && npm run lint",
+    "test:coverage": "env-cmd ./environment/test.env  ./node_modules/.bin/nyc  --reporter=lcovonly  --reporter=html --reporter=text ./node_modules/.bin/mocha --recursive --timeout=15000 --slow 2 --require @babel/register --require @babel/polyfill --require ./test/setup.test.js --exit",
+    "test-build": "env-cmd ./environment/test.env nyc mocha --recursive --reporter=mocha-bamboo-reporter --timeout=15000 --slow 2 --require @babel/register  --require @babel/polyfill --require ./test/setup.test.js --exit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@digipolis/auth": "^1.4.3",
+    "@digipolis/response": "~2.0.0",
+    "body-parser": "~1.19.0",
+    "express": "~4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.2.0",
+    "mongoose": "^5.10.15",
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5",
+    "uuid": "~8.3.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/polyfill": "~7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "~7.9.0",
+    "chai": "^4.2.0",
+    "env-cmd": "^8.0.2",
+    "eslint": "~4.19.1",
+    "eslint-config-airbnb-base": "~12.1.0",
+    "eslint-plugin-import": "~2.11.0",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.4",
+    "nyc": "^14.1.1",
+    "rewire": "^4.0.1",
+    "sinon": "^7.4.1",
+    "supertest": "^3.0.0"
+  }
+}
